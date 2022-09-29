@@ -27,6 +27,8 @@ func main() {
 		return
 	} else {
 		fmt.Println("Path to the file is: ", path)
-		fmt.Println(core.LoadImage(path))
+		i := core.CreateInterpreter(core.LoadImage(path))
+		i.Run()
+		fmt.Println(i)
 	}
 }

@@ -11,27 +11,30 @@ import (
 )
 
 type imgInCompile struct {
-	Img image.Image
+	Img *image.RGBA
 	con []byte
 }
 
 func Compile(path string) {
 	file, err := os.Open(path)
 	if err != nil {
-		panic(err)
+		fmt.Println("Error while opening the file: ", err)
 		return
 	}
 	defer file.Close()
 	con, err := io.ReadAll(file)
 	if err != nil {
-		panic(err)
+		fmt.Println("Error while reading the file: ", err)
 		return
 	}
 	img := imgInCompile{con: con}
+	img.Compile()
+	savePng(path, img.Img)
 }
 
 func (i *imgInCompile) Compile() {
 	matrix := [][]string{}
+	i.con = []byte(strings.ReplaceAll(string(i.con), "\r", ""))
 	temp := strings.Split(string(i.con), "\n")
 	for _, v := range temp {
 		matrix = append(matrix, strings.Split(v, ","))
@@ -59,13 +62,13 @@ func (i *imgInCompile) Compile() {
 			pix = append(pix, uint8(t))
 		}
 	}
-
+	i.Img.Pix = pix
 }
 
 func savePng(path string, img image.Image) {
 	f, err := os.Create(path + ".png")
 	if err != nil {
-		panic(err)
+		fmt.Println("Error while creating the file: ", err)
 		return
 	}
 	png.Encode(f, img)
