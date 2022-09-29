@@ -1,5 +1,7 @@
 package core
 
+import "fmt"
+
 type Interpreter struct {
 	Code  []uint8
 	stack *Stack
@@ -16,8 +18,16 @@ func (i *Interpreter) Run() {
 }
 
 func (i *Interpreter) Call(v uint8) {
-	if v <= 0 && v <= 127 {
+	if v == 0 {
+		return
+	}
+	if v <= 1 && v <= 128 {
 		i.stack.Push(v)
 		return
+	} else if v >= 129 && v <= 255 {
+		switch v {
+		case 129:
+			fmt.Print(i.stack.Pop())
+		}
 	}
 }
