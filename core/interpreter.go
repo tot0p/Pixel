@@ -21,8 +21,9 @@ func (i Interpreter) String() string {
 }
 
 func (i *Interpreter) Run() {
-	for k, v := range i.Code {
-		v.Call(k)
+	cursor := 0
+	for cursor < len(i.Code) {
+		cursor = i.Code[cursor].Call(cursor, i.stack)
 	}
 	fmt.Println("\nreturn 0")
 }

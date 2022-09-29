@@ -25,6 +25,10 @@ func (s *Stack) Push(i uint8) {
 func (s *Stack) Pop() uint8 {
 	if s.next == nil {
 		return s.i
+	} else if s.next.next == nil {
+		i := s.next.i
+		s.next = nil
+		return i
 	}
 	return s.next.Pop()
 }
