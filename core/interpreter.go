@@ -15,7 +15,7 @@ func CreateInterpreter(code []uint8) *Interpreter {
 }
 
 func (i Interpreter) String() string {
-	return fmt.Sprint(*i.stack)
+	return fmt.Sprint("Stack : ", *i.stack, "\nle code : ", i.Code)
 }
 
 func (i *Interpreter) Run() {
