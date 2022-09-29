@@ -37,13 +37,15 @@ func (i *imgInCompile) Compile() {
 	i.con = []byte(strings.ReplaceAll(string(i.con), "\r", ""))
 	temp := strings.Split(string(i.con), "\n")
 	for _, v := range temp {
-		matrix = append(matrix, strings.Split(v, ","))
-		if len(matrix[len(matrix)-1]) != len(matrix[0]) {
-			fmt.Println("The image is not a rectangle")
-			return
-		} else if (len(matrix[len(matrix)-1]) % 4) != 0 {
-			fmt.Println("Wrong number of nb")
-			return
+		if v != "" {
+			matrix = append(matrix, strings.Split(v, ","))
+			if len(matrix[len(matrix)-1]) != len(matrix[0]) {
+				fmt.Println("The image is not a rectangle")
+				return
+			} else if (len(matrix[len(matrix)-1]) % 4) != 0 {
+				fmt.Println("Wrong number of nb")
+				return
+			}
 		}
 	}
 	i.Img = image.NewRGBA(image.Rect(0, 0, len(matrix[0])/4, len(matrix)))
