@@ -7,6 +7,16 @@ type Stack struct {
 	next *Stack
 }
 
+func Reverse(s *Stack) {
+	start := s
+	n := Stack{0, nil}
+	for start.next != nil {
+		n.Push(start.Pop())
+	}
+	//fmt.Println("debug : ", n)
+	*start = n
+}
+
 func (s Stack) String() string {
 	if s.next == nil {
 		return fmt.Sprintf("value %d", s.i)

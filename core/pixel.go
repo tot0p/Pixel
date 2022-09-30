@@ -18,7 +18,7 @@ func (p *Pixel) Call(n int, stack *Stack) int {
 		return n + 1
 	}
 	switch p.R {
-	case 255:
+	case 255: // add to stack
 		if p.B == 0 {
 			stack.Push(p.G)
 		} else if p.G == 0 {
@@ -26,7 +26,7 @@ func (p *Pixel) Call(n int, stack *Stack) int {
 		} else {
 			stack.Push(p.G * p.B)
 		}
-	case 128:
+	case 128: // print
 		if p.G == 0 && p.B == 0 {
 			module.PrintRune(int32(stack.Pop()))
 		} else if p.G == 0 {
@@ -34,9 +34,11 @@ func (p *Pixel) Call(n int, stack *Stack) int {
 		} else if p.B == 0 {
 			module.PrintRune(int32(p.G))
 		} else {
-			module.PrintRune(int32(p.G * p.B))
+			module.PrintRune(int32(int(p.G) * int(p.B)))
 		}
-	case 10:
+	case 64: // reverse stack
+		Reverse(stack)
+	case 10: // add
 		a, b := p.G, p.B
 		if p.G == 0 {
 			a = stack.Pop()
@@ -45,7 +47,7 @@ func (p *Pixel) Call(n int, stack *Stack) int {
 			b = stack.Pop()
 		}
 		stack.Push(a + b)
-	case 20:
+	case 20: // sub
 		a, b := p.G, p.B
 		if p.G == 0 {
 			a = stack.Pop()
@@ -54,7 +56,7 @@ func (p *Pixel) Call(n int, stack *Stack) int {
 			b = stack.Pop()
 		}
 		stack.Push(a - b)
-	case 30:
+	case 30: // mul
 		a, b := p.G, p.B
 		if p.G == 0 {
 			a = stack.Pop()
@@ -63,7 +65,7 @@ func (p *Pixel) Call(n int, stack *Stack) int {
 			b = stack.Pop()
 		}
 		stack.Push(a * b)
-	case 40:
+	case 40: // div
 		a, b := p.G, p.B
 		if p.G == 0 {
 			a = stack.Pop()
