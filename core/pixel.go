@@ -74,6 +74,17 @@ func (p *Pixel) Call(n int, stack *Stack) int {
 			b = stack.Pop()
 		}
 		stack.Push(a / b)
+	case 50: // jump
+		a, b := p.G, p.B
+		return int(a) * int(b)
+	case 60: // if = 0
+		a, b := p.G, p.B
+		if p.G == 0 {
+			a = stack.Pop()
+		}
+		if a == 0 {
+			return int(b)
+		}
 	}
 	return n + 1
 }
