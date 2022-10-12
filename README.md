@@ -1,9 +1,10 @@
 # Pixel
 
 
+
 ## Introduction
 
-Pixel is a esolang, was created by me, and is still in development.
+Pixel is an esolang, was created by me, and is still in development.
 
 ## How to use
 
@@ -28,9 +29,21 @@ now compile it, and we are this image (
 and you can run it
 
 
-### Syntaxe
+### for compile it
 
-Pixel is a esolang, so it's syntaxe is very simple , there are one type of data , utf-8 code
+```bash
+go run . -c demo/HelloWorld/HelloWorld.pix
+```
+
+### for run it
+
+```bash
+go run . demo/HelloWorld/HelloWorld.pix.png
+```
+
+### Syntax
+
+Pixel is an esolang, so it's syntax is very simple , there are one type of data , utf-8 code
 
 | R   | G     | B     | A   | Description                                                                                                                         |
 |-----|-------|-------|-----|-------------------------------------------------------------------------------------------------------------------------------------|

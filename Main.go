@@ -8,27 +8,29 @@ import (
 
 var (
 	path    = ""
-	compile = false
+	compile = flag.Bool("c", false, "Compile the file")
+	debug   = flag.Bool("d", false, "Debug the file")
 )
 
 func init() {
-	flag.BoolVar(&compile, "compile", false, "Compile the file")
-	flag.StringVar(&path, "path", "", "path to the file")
 	flag.Parse()
 }
 
 func main() {
+	path = flag.Arg(0)
 	if path == "" {
 		fmt.Println("Please provide a path to the file")
 		return
 	}
-	if compile {
+	if *compile {
 		core.Compile(path)
 		return
 	} else {
 		fmt.Println("Path to the file is: ", path)
 		i := core.CreateInterpreter(core.LoadImage(path))
 		i.Run()
-		fmt.Println(i)
+		if *debug {
+			fmt.Println(i)
+		}
 	}
 }
