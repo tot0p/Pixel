@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Pixel is an esolang, was created by me, and is still in development.
+Pixel is an esolang and is still in development.
 
 ## How to use
 
